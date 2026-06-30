@@ -17,17 +17,12 @@ columns = joblib.load("columns.pkl")
 
 
 @app.route("/")
-def home():
-    return "<h1>Heart</h1>"
-
 
 @app.route("/predict", methods=["POST"])
 def predict():
     data = request.get_json()
     df = pd.DataFrame([data])
     df = pd.get_dummies(df)
-    print(df.columns)
-    print(df)
     df = df.reindex(columns=columns, fill_value=0)
     scaled_data = scaler.transform(df)
     prediction = model.predict(scaled_data)

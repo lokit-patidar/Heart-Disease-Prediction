@@ -26,7 +26,6 @@ export default function Card() {
             },
             body: JSON.stringify(formData)
         });
-        console.log(formData)
         const result = await response.json();
         return result
     }
@@ -99,7 +98,9 @@ export default function Card() {
                             onChange={(e) =>
                                 setFormData({
                                     ...formData,
-                                    FastingBS: e.target.value
+                                    FastingBS: e.target.value === ""
+                                    ? ""
+                                    : parseFloat(e.target.value)
                                 })
                             } className='bg-[#f8fafc] p-2 border-1 border-[#e2e8f0] rounded-lg'>
                             <option value="0">≤ 120 mg/dl (0)</option>

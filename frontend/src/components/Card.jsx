@@ -19,7 +19,7 @@ export default function Card() {
     })
 
     async function sendReq() {
-        const response = await fetch("https://heart-disease-prediction-06.onrender.com", {
+        const response = await fetch("https://heart-disease-prediction-06.onrender.com/predict", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

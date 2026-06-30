@@ -1,38 +1,52 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from tensorflow import keras
-import joblib
-import numpy as np
 import pandas as pd
+import joblib
 
 app = Flask(__name__)
-
 CORS(app)
 
-model = keras.models.load_model("heart_disease_model.keras")
-
+model = joblib.load("heart_disease_model.pkl")
 scaler = joblib.load("scaler.pkl")
-
 columns = joblib.load("columns.pkl")
 
 
 @app.route("/")
-
-@app.route("/predict", methods=["POST"])
-def predict():
-    data = request.get_json()
-    df = pd.DataFrame([data])
-    df = pd.get_dummies(df)
-    df = df.reindex(columns=columns, fill_value=0)
-    scaled_data = scaler.transform(df)
-    prediction = model.predict(scaled_data)
-    result = "Heart Disease" if prediction[0][0] >= 0.5 else "No Heart Disease"
-
+def home():
     return jsonify({
-        "prediction": result, 
-        "probability": float(prediction[0][0])
+        "message": "Heart Disease Prediction API is Running!"
     })
 
 
+@app.route("/predict", methods=["POST"])
+def predict():
+    try:
+        data = request.get_json()
+
+        df = pd.DataFrame([data])
+
+        df = pd.get_dummies(df)
+
+        df = df.reindex(columns=columns, fill_value=0)
+
+        scaled_data = scaler.transform(df)
+
+        prediction = model.predict(scaled_data)[0]
+
+        probability = model.predict_proba(scaled_data)[0][1]
+
+        result = "Heart Disease" if prediction == 1 else "No Heart Disease"
+
+        return jsonify({
+            "prediction": result,
+            "probability": float(probability)
+        })
+
+    except Exception as e:
+        return jsonify({
+            "error": str(e)
+        }), 500
+
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000)

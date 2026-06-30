@@ -30,7 +30,7 @@ export default function Card() {
         return result
     }
     return (
-        <div className={`bg-white shadow-lg ${click ? "pb-0" : "pb-8"} flex flex-col gap-4 relative -top-[70px] z-1 max-w-8/10 border-1 border-white mx-auto rounded-3xl overflow-hidden`}>
+        <div className={`bg-white shadow-lg ${prediction ? "pb-0" : "pb-8"} flex flex-col gap-4 relative -top-[70px] z-1 max-w-8/10 border-1 border-white mx-auto rounded-3xl overflow-hidden`}>
             <div className='flex bg-[#0f172b] h-25 w-full flex flex-col gap-3 items-center justify-center'>
                 <div className='text-lg text-bold text-white px-2'>Patient Parameters</div>
                 <div className='text-sm text-[#8e9fb8] px-2'>Enter the clinical features to assess risk.</div>

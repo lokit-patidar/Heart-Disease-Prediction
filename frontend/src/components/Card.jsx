@@ -30,13 +30,13 @@ export default function Card() {
         return result
     }
     return (
-        <div className={`bg-white shadow-lg ${prediction ? "pb-0" : "pb-8"} flex flex-col gap-4 relative -top-[70px] z-1 max-w-8/10 border-1 border-white mx-auto rounded-3xl overflow-hidden`}>
+        <div className={`bg-white shadow-lg ${prediction ? "pb-0" : "pb-8"} flex flex-col gap-4 relative -top-10 md:-top-16 z-1 w-[95%] sm:w-[90%] md:w-[85%] lg:w-[75%] xl:w-[65%] border-1 border-white mx-auto rounded-3xl overflow-hidden`}>
             <div className='flex bg-[#0f172b] h-25 w-full flex flex-col gap-3 items-center justify-center'>
                 <div className='text-lg text-bold text-white px-2'>Patient Parameters</div>
                 <div className='text-sm text-[#8e9fb8] px-2'>Enter the clinical features to assess risk.</div>
             </div>
             <div className='flex flex-col gap-5 w-9/10 mx-auto bg-[#fefeff] text-sm'>
-                <form action="" className='grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mb-2'>
+                <form action="" className='grid gap-6 grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 mb-2'>
                     <div className='flex flex-col gap-1'>
                         <label >Age</label>
                         <input className='bg-[#f8fafc] p-2 border-1 border-[#e2e8f0] rounded-lg' type="text" placeholder='e.g.45' value={formData.Age} onChange={(e) =>
